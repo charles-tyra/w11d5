@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+
 
 import PokemonDetail from './PokemonDetail';
 import CreatePokemonForm from './CreatePokemonForm';
@@ -12,6 +16,8 @@ const PokemonBrowser = () => {
     return state.pokemon.list.map(pokemonId => state.pokemon[pokemonId]);
   });
   const [showForm, setShowForm] = useState(false);
+
+  const store = createStore()
 
 
   if (!pokemon) {
